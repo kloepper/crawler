@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 function get_unique_links() {
     local url=$1
     lynx -dump -listonly $url | # Use lynx text browser to list all links.
@@ -17,5 +16,18 @@ then
     exit 1
 fi
 
-get_unique_links $FIRST_URL
+allUrls=($FIRST_URL)
+INDEX=0
+while [ $INDEX -lt ${#allUrls[@]} ]; do
+    CURRENT_URL=${allUrls[$INDEX]}
+    echo $CURRENT_URL
+    for URL in `get_unique_links $CURRENT_URL`; do
+        echo "  $URL"
+        allUrls+=($URL)
+    done
 
+    # Remove duplicate URLs
+    allUrls=($(echo "${allUrls[@]}" | tr ' ' '\n' | awk '!x[$0]++' | tr '\n' ' '))
+
+    INDEX=$(($INDEX+1))
+done
