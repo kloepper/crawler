@@ -3,6 +3,7 @@
 function get_unique_links() {
     local url=$1
     lynx -dump -listonly $url | # Use lynx text browser to list all links.
+        grep "^ *[0-9.]\+ http" | # Do not pass ouptut lines not part of link list.
         grep -o "https*://.*$" |  # Extract only the URL portion of the lynx list output.
         awk '!x[$0]++' # Filter out duplicate links.
 }
