@@ -118,12 +118,26 @@ class ConcurrentFetcher {
   }
 
   handleFetchResult(fetchResult) {
+    const logFetchFail = (message) => {
+      let failMessage = `FAIL ${fetchResult.url}`;
+      if (typeof message !== "undefined") {
+        failMessage += ` ${message}`;
+      }
+      failMessage += ` ${fetchResult.status} ${fetchResult.statusText}`;
+      console.log(failMessage);
+    }
+
+    const debugLogFetchResult = () => {
+      fetchResult.bodyText = fetchResult.bodyText.slice(0, 200);
+      console.error(fetchResult);
+    }
+
     switch (fetchResult.status) {
       case 200:
         // Only parse body for HTML results.
         const contentType = fetchResult.headers["content-type"];
         if (!contentType.includes("text/html")) {
-          console.log(`${fetchResult.url} is not HTML (found ${contentType})`);
+          logFetchFail(`is not HTML (found ${contentType})`)
           break;
         }
 
@@ -136,18 +150,23 @@ class ConcurrentFetcher {
         }
         break;
       case 301:
+      case 302:
         const redirectLocation = fetchResult.headers.location;
         if (!redirectLocation) {
-          delete(fetchResult.bodyText);
-          console.log(fetchResult);
-          throw new Error("Redirect missing location");
+          logFetchFail("redirect location missing");
+          debugLogFetchResult();
+          break;
         }
         console.log(`${fetchResult.url} -> ${redirectLocation}`);
         this.fetchQueue.push(redirectLocation)
         break;
+      case 404:
+        logFetchFail();
+        break;
       default:
-        delete(fetchResult.bodyText);
-        console.log(fetchResult);
+        logFetchFail();
+        debugLogFetchResult();
+        break;
       }
   }
 }
