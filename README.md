@@ -2,6 +2,11 @@
 ## Problem
 Write a simple web crawler.
 
+## OSX setup
+ - brew install node
+ - brew install lynx
+ - brew install coreutils
+
 ## Design process
 Write code quickly to understand the problem space. It is difficult to really begin to understand a problem unless there is some solution available to crique (no matter how inefficient or naieve).
 
