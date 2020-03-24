@@ -50,7 +50,7 @@ async function fetch(url) {
     }
 
     try {
-      protocol.get(fetchUrl.href, handleResponse);
+      protocol.get(fetchUrl.href, handleResponse).on("error", (err) => { reject(err); });
     } catch (err) {
       reject(err);
     }
