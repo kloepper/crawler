@@ -10,7 +10,8 @@
     "deploy": "sls deploy -f crawl_worker",
     "test": "jest --coverage",
     "tsc": "tsc",
-    "env": "env"
+    "env": "env",
+    "rollup": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -36,7 +37,7 @@
     "testRegex": ".test.ts",
     "coverageDirectory": "build/coverage",
     "collectCoverageFrom": [
-      "*.ts"
+      "**/*.ts"
     ],
     "preset": "ts-jest"
   }

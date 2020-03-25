@@ -19,6 +19,7 @@
     "allowJs": true
   },
   "include": [
-    "crawl_worker.ts"
+    "lib/crawl.ts",
+    "workers/crawl_worker.ts"
   ]
 }

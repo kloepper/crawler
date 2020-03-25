@@ -1,4 +1,4 @@
-import {listHtmlLinks} from "./crawl_worker";
+import {listHtmlLinks} from "./crawl";
 
 const expectedBaseUrl = new URL("http://example.com/ducks");
 const expected = [

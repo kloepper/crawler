@@ -13,7 +13,7 @@ plugins:
 functions:
     crawl_worker:
         name: crawl_worker
-        script: build/compiled/crawl_worker.js
+        script: build/bundles/crawl_worker.js
         events:
             - http:
-                url: ${env:WORKER_URL}
+                url: ${env:WORKER_URL}*
