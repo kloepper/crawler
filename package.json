@@ -7,7 +7,10 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "deploy": "sls deploy -f crawl_worker",
+    "test": "jest --coverage",
+    "tsc": "tsc",
+    "env": "env"
   },
   "repository": {
     "type": "git",
@@ -31,7 +34,9 @@
   "jest": {
     "testRegex": ".test.ts",
     "coverageDirectory": "build/coverage",
-    "collectCoverageFrom": ["*.ts"],
+    "collectCoverageFrom": [
+      "*.ts"
+    ],
     "preset": "ts-jest"
   }
 }

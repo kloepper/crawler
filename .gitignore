@@ -1,2 +1,5 @@
 crawl.sqlite
 node_modules
+.env
+build/
+.serverless/

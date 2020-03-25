@@ -1,0 +1,19 @@
+service:
+    name: crawler
+    config:
+        accountId: ${env:CLOUDFLARE_ACCOUNT_ID}
+        zoneId: ${env:CLOUDFLARE_ZONE_ID}
+
+provider:
+    name: cloudflare
+
+plugins:
+    - serverless-cloudflare-workers
+
+functions:
+    crawl_worker:
+        name: crawl_worker
+        script: build/compiled/crawl_worker.js
+        events:
+            - http:
+                url: ${env:WORKER_URL}
