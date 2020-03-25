@@ -17,9 +17,11 @@ then
     exit 1
 fi
 
-DISPLAY_FILE="crawl_$FIRST_URL.display"
-OUTPUT_FILE="crawl_$FIRST_URL.urls"
-INDEX_FILE="crawl_$FIRST_URL.index"
+HOST=`node -e "console.log(new URL('$FIRST_URL').host)"`
+
+DISPLAY_FILE="crawl_$HOST.display"
+OUTPUT_FILE="crawl_$HOST.urls"
+INDEX_FILE="crawl_$HOST.index"
 
 if [ -f "$INDEX_FILE" ]; then
     INDEX=`cat "$INDEX_FILE"`
