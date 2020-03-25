@@ -2,20 +2,19 @@
 include .env
 export $(shell sed 's/=.*//' .env)
 
-.DEFAULT_GOAL: all
-.PHONY: all
-all: YoMundo.class
+.DEFAULT_GOAL: test
 
-YoMundo.class: crawl.java ; javac -cp "jedis-2.4.2.jar"  crawl.java
+YoMundo.class: scratch/crawl.java ; javac -cp "scratch/jedis-2.4.2.jar" scratch/crawl.java
 
 .PHONY: java
-java: YoMundo.class ; java -cp ".:jedis-2.4.2.jar" YoMundo
+java: scratch/YoMundo.class ; java -cp "./scratch:scratch/jedis-2.4.2.jar" YoMundo
 
 .PHONY: node
 node: crawl.js ; ./crawl.js
 
 .PHONY: python
-python: crawl.py ; ./crawl.py 
+python: scratch/crawl.py ; ./scratch/crawl.py
+
 .PHONY: test
 test: build/coverage/lcov-report/index.html
 
@@ -28,5 +27,5 @@ deploy: test build/compiled/crawl_worker.js ; npm run deploy
 
 .PHONY: clean
 clean:
-	rm -f YoMundo.class || true
+	rm -f scratch/YoMundo.class || true
 	rm -rf build/
