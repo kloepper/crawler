@@ -20,8 +20,26 @@ function run_crawl() {
     echo $crawl_name fetched $fetch_count pages, with $failure_count failures, finding $link_count links.
 }
 
-CRAWL_TIME=5
-FIRST_URL="https://www.google.com"
+function usage() {
+    echo "Usage:"
+    echo "compare_crawlers.sh <URL_START> [<SECONDS_TO_RUN_EACH_CRAWL>]"
+    exit 1
+}
+
+CRAWL_TIME=$2
+FIRST_URL=$1
+
+# Set default CRAWL_TIME
+if [ -z "$CRAWL_TIME" ]
+then
+    CRAWL_TIME=20
+fi
+
+if [ -z "$FIRST_URL" ]
+then
+    echo "Please specify starting URL."
+    usage
+fi
 
 run_crawl bash $CRAWL_TIME "./crawl.sh $FIRST_URL"
 run_crawl node_sequential $CRAWL_TIME "./crawl.js $FIRST_URL"
