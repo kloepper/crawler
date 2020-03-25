@@ -216,9 +216,7 @@ async function run() {
   fetcher.run(url);
 }
 
-try {
-  run();
-} catch (err) {
+run().catch((error) => {
   if (error instanceof ArgumentError) {
     console.log(error.toString());
     console.log(usage());
@@ -227,4 +225,4 @@ try {
 
   console.log(`Error running crawler: ${error}`);
   process.exit(1);
-}
+});
