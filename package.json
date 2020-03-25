@@ -1,0 +1,35 @@
+{
+  "name": "crawler",
+  "version": "1.0.0",
+  "description": "A web crawler",
+  "main": "crawl.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kloepper/crawler.git"
+  },
+  "author": "Kyle Kloepper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kloepper/crawler/issues"
+  },
+  "homepage": "https://github.com/kloepper/crawler#readme",
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
+    "types-cloudflare-worker": "^1.1.2",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "testRegex": ".test.ts",
+    "coverageDirectory": "build/coverage",
+    "collectCoverageFrom": ["*.ts"],
+    "preset": "ts-jest"
+  }
+}
